@@ -3,19 +3,23 @@ version: "3.9"
 # TODO: Define two custom networks: "frontend" and "backend"
 # Attach app + redis to frontend; app + db to backend.
 # This prevents redis from being able to reach db directly.
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
 
 services:
   app:
     build: .
     ports:
-      - "5000:5000"
-    environment:
-      # TODO: Fix these URLs to use service names instead of localhost
-      - REDIS_URL=redis://localhost:6379
-      - DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myapp
+      - "5000:5000"   
     depends_on:
       - redis
       - db
+    networks:
+      - frontend
+      - backend
     # TODO: Attach to both networks
 
   redis:
@@ -23,13 +27,15 @@ services:
     ports:
       - "6379:6379"   # keep this — Redis should be debuggable from host
     # TODO: Attach to frontend only
-
+    networks:
+      - frontend
   db:
     image: postgres:15-alpine
-    ports:
-      - "5432:5432"   # TODO: Remove this — Postgres should NOT be reachable from the host
+    
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: myapp
     # TODO: Attach to backend only
+    networks:
+      - backend

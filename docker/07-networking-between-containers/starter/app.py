@@ -7,8 +7,8 @@ app = Flask(__name__)
 # TODO: These connection strings use localhost — this is wrong for Docker networking.
 # Containers have separate network namespaces; localhost refers to the container itself.
 # Replace localhost with the Docker Compose service name for each service.
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/myapp")
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/myapp")
 
 
 @app.route("/")
