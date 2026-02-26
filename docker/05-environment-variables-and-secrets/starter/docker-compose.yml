@@ -1,0 +1,27 @@
+
+# TODO: There are multiple problems in this file.
+# 1. Secrets are passed as plain environment variables — move DB_PASS to a Docker secret.
+# 2. There is no env_file: directive — add one pointing to .env.
+# 3. There is no secrets: top-level block — add one.
+secrets:
+  db_password:
+    file: ./db_password.txt
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:     
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - APP_ENV=${APP_ENV}
+      - APP_PORT=${APP_PORT}
+      - SLOW_DELAY=${SLOW_DELAY}
+    env_file:
+      - .env
+    
+    # TODO: mount the db_password secret here
+    secrets:
+      - db_password
