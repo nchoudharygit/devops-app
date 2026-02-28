@@ -5,11 +5,12 @@ name: CI
 on:
   push:
     branches: [main]
-
+  pull_request:
+    branches: [main]
 jobs:
   test:
     # BUG 2: runs-on is missing — add: runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v1   # BUG 3: use v4
