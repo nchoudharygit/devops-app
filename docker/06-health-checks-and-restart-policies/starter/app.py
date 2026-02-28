@@ -56,7 +56,10 @@ def info():
         "uptime_seconds": uptime,
         "port": int(os.getenv("PORT", 5000))
     })
-
+@app.route("/crash")
+def crash():
+    import os
+    os._exit(1)
 
 @app.route("/simulate/error")
 def simulate_error():
