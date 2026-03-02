@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         # BUG 3: pytest and flake8 are not installed — add requirements-dev.txt
         
-        run: pip install -r requirements-dev.txt
+        run: pip install -r requirements.txt && pip install -r requirements-dev.txt
   deploy:
     needs: build
     runs-on: ubuntu-latest
