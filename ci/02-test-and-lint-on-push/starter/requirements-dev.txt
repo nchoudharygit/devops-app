@@ -1,4 +1,0 @@
-pytest
-flake8
-# BUG 3: pytest and flake8 are not installed — add requirements-dev.txt
-pytest-cov
