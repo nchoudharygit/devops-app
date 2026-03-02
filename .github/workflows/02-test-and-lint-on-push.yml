@@ -46,8 +46,8 @@ jobs:
       
       - name: Lint
         # BUG 1: no .flake8 config — will fail on long lines in the sample app
-        run: flake8 . --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
-
+        run: flake8 app tests --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
+        # Alternative:
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -64,7 +64,7 @@ jobs:
 
       # BUG 5: no artifact upload step for coverage.xml
       - name: Upload coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage.xml
           path: coverage.xml
