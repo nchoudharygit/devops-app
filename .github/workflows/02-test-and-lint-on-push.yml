@@ -20,9 +20,9 @@ jobs:
 
       - name: Install dependencies
         # BUG 3: pytest and flake8 are not installed — add requirements-dev.txt
-        run: pip install -r requirements.txt
-
-  lint:
+        
+        run: pip install -r requirements-dev.txt
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +32,18 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Deploy
+        run: echo "Deploying to production..."  # Placeholder for actual deployment commands
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      
       - name: Lint
         # BUG 1: no .flake8 config — will fail on long lines in the sample app
         run: flake8 . --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
