@@ -30,7 +30,7 @@ jobs:
       
       - name: Run flake8
         # BUG 1: no .flake8 config — will fail on long lines in the sample app
-        run: flake8 . --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
+        run: flake8 app.py 
         # Alternative:
   
   test:
