@@ -24,7 +24,7 @@ jobs:
       
       - name: Run flake8
         # BUG 1: no .flake8 config — will fail on long lines in the sample app
-        run: flake8 app tests --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
+        run: flake8 . --max-line-length=120 --exclude=.git,__pycache__,.venv,venv --per-file-ignores="__init__.py:F401"
         # Alternative:
   
   test:
@@ -41,7 +41,7 @@ jobs:
 
       - name: Run pytest
         # BUG 2: no coverage flags — add --cov=app --cov-report=xml
-        run: pytest --cov=app --cov-report=xml
+        run: pytest --cov=. --cov-report=xml
 
       # BUG 5: no artifact upload step for coverage.xml
       - name: Upload coverage
