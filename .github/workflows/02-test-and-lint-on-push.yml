@@ -20,7 +20,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt && pip install -r requirements-dev.txt
+        run: python -m pip install -r requirements.txt && pip install -r requirements-dev.txt
       
       - name: Run flake8
         # BUG 1: no .flake8 config — will fail on long lines in the sample app
@@ -37,7 +37,7 @@ jobs:
           python-version: "3.11"
       
       - name: Install dependencies
-        run: pip install -r requirements.txt && pip install -r requirements-dev.txt
+        run: python -m pip install -r requirements.txt && pip install -r requirements-dev.txt
 
       - name: Run pytest
         # BUG 2: no coverage flags — add --cov=app --cov-report=xml
