@@ -32,7 +32,7 @@ jobs:
         # BUG 2: hardcoded password — use docker/login-action with secrets
         uses: docker/login-action@v2
         with:
-           username: nchoudhary1108
+           username: ${{ secrets.DOCKERHUB_USERNAME }}
            password: ${{ secrets.DOCKER_PASSWORD }}
 
 
