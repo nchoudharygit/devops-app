@@ -44,5 +44,5 @@ jobs:
         with:
             context: .
             push: true
-            tags: myuser/devops-app:latest, myuser/devops-app:${{ github.sha }}
+            tags: nchoudhary1108/devops-app:latest, nchoudhary1108/devops-app:${{ github.sha }}
         
