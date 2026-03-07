@@ -40,7 +40,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            only {
+            when {
                 branch 'main'
             }
             // BUG 5: No when condition — runs on ALL branches including feature branches
