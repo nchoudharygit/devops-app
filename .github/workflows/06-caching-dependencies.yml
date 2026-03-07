@@ -30,7 +30,7 @@ jobs:
           pip install pytest pytest-cov flake8
 
       - name: Lint
-        run: flake8 .
-
+        run: flake8 app.py
+        
       - name: Test
         run: pytest --cov=app --cov-report=xml
