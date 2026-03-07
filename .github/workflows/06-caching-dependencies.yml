@@ -32,5 +32,6 @@ jobs:
       - name: Lint
         run: flake8 app.py
 
-      - name: Test
-        run: pytest --cov=app --cov-report=xml
+      - name: Run pytest
+        # BUG 2: no coverage flags — add --cov=app --cov-report=xml
+        run: pytest --cov=. --cov-report=xml
