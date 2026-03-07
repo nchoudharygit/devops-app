@@ -18,11 +18,13 @@ pipeline {
             steps {
                 // BUG 2: Installing globally without a virtualenv
                 // May conflict with system Python or other builds
-                
-               python -m venv venv
-               . venv/bin/activate
-               pip install -r requirements.txt pytest
-            }
+             sh '''
+                 python -m venv venv
+                 . venv/bin/activate
+                 pip install -r requirements.txt pytest
+             '''
+            }   
+              
         }
 
         stage('Test') {
