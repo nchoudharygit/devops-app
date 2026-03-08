@@ -31,7 +31,7 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.payload.issue.number,  // BUG 4: should be context.issue.number
+              issue_number: context.issue.number,  
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Tests passed!'
