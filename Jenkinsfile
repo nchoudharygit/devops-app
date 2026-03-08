@@ -29,7 +29,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'pytest --junitxml=test-results.xml'
+                sh '''
+                    . venv/bin/activate
+                    pytest --junitxml=test-results.xml
+                '''
             }
             post {
                 always {
@@ -56,3 +59,4 @@ pipeline {
         }
     }
 }
+
