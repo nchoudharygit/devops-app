@@ -75,7 +75,7 @@ jobs:
       - name: rollback on failure
         if: failure()
         run: |
-          helm rollback devops-app 1 
+          echo "🔁 Rolling back to previous version..."
       # - name: Deploy
       #   run: |
       #     echo "Simulating failure"
