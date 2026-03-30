@@ -25,14 +25,15 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade devops-app ./chart \
-            --install \                         
-            --wait \                            
-            --namespace prod \           
+          helm upgrade --install devops-app ./chart \
+            --namespace prod \
+            --set image.tag=${{ github.sha }} \
+            --wait \
             --timeout 3m \
-            --atomic \
-            --set image.tag=${{ github.sha }}
+            --atomic
          
 
       - name: Test cluster
         run: kubectl get nodes
+
+        
