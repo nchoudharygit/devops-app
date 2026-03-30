@@ -20,15 +20,8 @@ jobs:
         
         run: |
           curl -X POST "${{ secrets.SLACK_WEBHOOK }}" \
-            -H 'Content-type: application/json' \
-            -d '{
-              "text": "Deployment failed for commit,
-               "attachments": [
-                 {
-                  "text": "Repo: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nCommit: ${{ github.sha }}\nRun: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                 }
-               ]
-            }'
+          -H 'Content-type: application/json' \
+          -d '{"text":"🚨 Deployment Failed in GitHub Actions"}'
         continue-on-error: true
         # BUG 3: message doesn't include status, branch, commit, or run URL
         # BUG 5: no continue-on-error: true — a broken webhook kills the pipeline
