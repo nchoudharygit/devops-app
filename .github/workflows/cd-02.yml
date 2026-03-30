@@ -25,12 +25,7 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade --install devops-app ./chart \
-            --namespace prod \
-            --set image.tag=${{ github.sha }} \
-            --wait \
-            --timeout 3m \
-            --atomic
+         helm upgrade devops-app ./chart --install --atomic --timeout 5m --wait 
          
 
       - name: Test cluster
