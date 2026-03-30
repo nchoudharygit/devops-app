@@ -68,6 +68,10 @@ jobs:
             --install --atomic --timeout 5m \
             --namespace prod \
             --set image.tag=${{ github.sha }}
+      - name: rollback on failure
+        if: failure()
+        run: |
+          helm rollback devops-app 1 
       # - name: Deploy
       #   run: |
       #     echo "Simulating failure"
