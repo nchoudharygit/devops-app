@@ -17,15 +17,15 @@ jobs:
         with:
           version: "3.14.0"
 
-      # - name: Configure kubeconfig
-      #   run: |
-      #     mkdir -p ~/.kube
-      #     echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
-      #     chmod 600 ~/.kube/config
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
 
       - name: Deploy
         run: |
-         helm upgrade devops-app ./chart --install --atomic --timeout 5m 
+         helm upgrade devops-app ./chart --install --namespace prod --set image.tag=${{ github.sha }} --wait --timeout 3m --atomic
          
 
       - name: Test cluster
