@@ -20,12 +20,12 @@ jobs:
       - name: Configure kubeconfig
         run: |
           mkdir -p ~/.kube
-
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
 
       - name: Deploy
         run: |
-         helm upgrade devops-app ./chart --install --atomic --timeout 5m --wait 
+         helm upgrade devops-app ./chart --install --atomic --timeout 5m 
          
 
       - name: Test cluster
