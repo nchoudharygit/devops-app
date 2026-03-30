@@ -21,6 +21,11 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
           chmod 600 ~/.kube/config
 
+      - name: Deploy
+        run: |
+          echo "Simulating failure"
+          exit 1
+
   rollback:
     needs: deploy
     if: failure()  
