@@ -25,10 +25,12 @@ jobs:
 
       - name: Deploy
         run: |
-         helm upgrade devops-app bitnami/nginx --install --timeout 3m --atomic
+         helm upgrade devops-app bitnami/nginx --install --timeout 3m --atomic -dry-run \
+            --namespace prod \
+            --set image.tag=${{ github.sha }}
          
 
-      - name: Test cluster
-        run: kubectl get nodes
+      # - name: Test cluster
+      #   run: kubectl get nodes
 
         
