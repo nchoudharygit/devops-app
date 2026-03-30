@@ -62,12 +62,16 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+      # - name: Deploy
+      #   run: |
+      #     helm upgrade devops-app ./chart \
+      #       --install --atomic --timeout 5m \
+      #       --namespace prod \
+      #       --set image.tag=${{ github.sha }}
       - name: Deploy
         run: |
-          helm upgrade devops-app ./chart \
-            --install --atomic --timeout 5m \
-            --namespace prod \
-            --set image.tag=${{ github.sha }}
+          echo "Simulating failure"
+          exit 1
       - name: rollback on failure
         if: failure()
         run: |
