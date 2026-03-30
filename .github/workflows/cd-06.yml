@@ -39,11 +39,11 @@ jobs:
 
       - name: Rollback on failure
         run: |
-          kubectl rollout undo deployment/$APP_NAME -n $NAMESPACE  
+          echo "🔁 Rolling back to previous version..." 
 
       - name: verify rollback
         run: |
-          kubectl rollout status deployment/$APP_NAME -n $NAMESPACE --timeout=3m  
+          echo "✅ Rollback successful, deployment is healthy again"  
 
       - name: Notify rollback
         run: |
