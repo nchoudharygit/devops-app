@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy
         run: |
-         helm template devops-app bitnami/nginx --install \
+         helm template devops-app bitnami/nginx \
             --namespace prod \
             --set image.tag=${{ github.sha }}
          
