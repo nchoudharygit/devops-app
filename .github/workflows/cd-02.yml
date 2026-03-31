@@ -5,8 +5,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-env:
-  KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}""
 
 jobs:
   deploy:
@@ -19,18 +17,25 @@ jobs:
         with:
           version: "3.14.0"
 
-      - name: Configure kubeconfig
+      - name: Add Bitnami repo
         run: |
-          mkdir -p ~/.kube
-          echo "$KUBECONFIG_DATA" > ~/.kube/config
+          helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
 
-      - name: Deploy
+
+      # - name: Configure kubeconfig
+      #   run: |
+      #     mkdir -p ~/.kube
+      #     echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+      #     chmod 600 ~/.kube/config
+
+      - name: render Helm template
         run: |
-          helm upgrade devops-app ./chart \  
-          --install \                         
-          --wait \                            
-          --namespace prod \           
-          --timeout 3m \
-          --atomic
-          --set image.tag=${{ github.sha }}
+          helm template devops-app bitnami/nginx \
+            --namespace prod \
+            --set image.tag=${{ github.sha }}
          
+
+      # - name: Test cluster
+      #   run: kubectl get nodes
+
+        
